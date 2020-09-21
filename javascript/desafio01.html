@@ -1,0 +1,121 @@
+<html>
+  <head>
+    <title>Desafio Starter - Introdução ao Javascript</title>
+  </head>
+
+  <body>
+    <script>
+      /* 
+        1º exercício
+        Crie uma função que dado o objeto endereco a seguir:
+      */
+      var endereco = {
+        rua: "Rua dos pinheiros",
+        numero: 1293,
+        bairro: "Centro",
+        cidade: "São Paulo",
+        uf: "SP",
+      };
+
+      /* Retorne o seguinte conteúdo:
+       O usuário mora em São Paulo / SP, no bairro Centro, na rua "Rua dos Pinheiros" com nº 1293.
+      */
+
+      function retornoEndereco(endereco) {
+        return (
+          "O usuário mora em" +
+          " " +
+          endereco.cidade +
+          "/" +
+          endereco.uf +
+          ", no bairro " +
+          endereco.bairro +
+          ", na rua " +
+          endereco.rua +
+          " com número " +
+          endereco.numero
+        );
+      }
+      console.log(retornoEndereco(endereco));
+
+      /*
+        2º exercício
+        Crie uma função que dado um intervalo (entre x e y) exiba todos número pares:
+      */
+      function pares(x, y) {
+        for (var i = x; i <= y; i++) {
+          if (i % 2 === 0) {
+            console.log(i);
+          }
+        }
+      }
+
+      pares(32, 321);
+
+      /*
+        3º exercício
+        Escreva uma função que verifique se o vetor de habilidades passado possui a habilidade "Javascript"
+        e retorna um booleano true/false caso exista ou não.
+      */
+      var skills = ["Javascript", "ReactJS", "React Native"];
+      function temHabilidade(skills) {
+        return skills.indexOf("Javascript") !== -1;
+      }
+      console.log(temHabilidade(skills));
+
+      /*
+        4º exercício
+        Escreva uma função que dado um total de anos de estudo retorna o quão experiente o usuário é:
+      */
+
+      function experiencia(anos) {
+        if (anos <= 1) {
+          return "Iniciante";
+        } else if (anos <= 3) {
+          return "Intermediário";
+        } else if (anos <= 6) {
+          return "Avançado";
+        } else {
+          return "Jedi Master";
+        }
+      }
+
+      var anosEstudo = 1;
+
+      console.log(experiencia(anosEstudo));
+
+      /*
+        5º exercício
+        Dado o seguinte vetor de objetos:
+      */
+      var usuarios = [
+        {
+          nome: "Diego",
+          habilidades: ["Javascript", "ReactJS", "Redux"],
+        },
+        {
+          nome: "Gabriel",
+          habilidades: ["VueJS", "Ruby on Rails", "Elixir"],
+        },
+      ];
+
+      /*
+        Escreva uma função que produza o seguinte resultado:
+        O Diego possui as habilidades: Javascript, ReactJS, Redux
+        O Gabriel possui as habilidades: VueJS, Ruby on Rails, Elixir
+      */
+
+      function userSkills(usuarios) {
+        for (usuario of usuarios) {
+          console.log(
+            "O " +
+              usuario.nome +
+              " possui as habilidades: " +
+              usuario.habilidades.join(", ")
+          );
+        }
+      }
+      userSkills(usuarios);
+    </script>
+  </body>
+</html>
