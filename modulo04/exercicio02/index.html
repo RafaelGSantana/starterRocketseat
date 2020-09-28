@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>2º exercício</h2>
+    <p>
+      Crie uma tela com um <b>input</b> que deve receber o nome de um usuário no
+      Github. Após digitar o nome do usuário e clicar no <b>botão buscar</b> a
+      aplicação deve buscar pela <b>API do Github</b> (conforme URL abaixo) os
+      dados de repositórios do usuário e mostrá-los em tela: <br />
+      <b>URL de exemplo:</b> https://api.github.com/users/RafaelGSantana/repos
+    </p>
+
+    <p>
+      Depois de preencher o input e adicionar, deve ser retornada uma lista com
+      os repositóios do usuário buscado
+    </p>
+
+    <hr />
+
+    <input type="text" name="user" />
+    <button onclick="listRepositories()">Adicionar</button>
+
+    <ul></ul>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
