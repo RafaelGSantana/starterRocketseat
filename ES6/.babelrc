@@ -1,0 +1,4 @@
+// O babel vai transformar as features feitas com ES6+ numa forma que todos os navegadores entendam.
+{
+  "presets": ["@babel/preset-env"]
+}
