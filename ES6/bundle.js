@@ -1,70 +1,43 @@
 "use strict";
 
-// Converta as funções nos seguintes trechos de código em Arrow Functions:
-// // 3.1
-// const arr = [1, 2, 3, 4, 5];
-// arr.map(function(item) {
-//  return item + 10;
-// });
-var arr = [1, 2, 3, 4, 5];
-arr.map(function (item) {
-  return item + 10;
-}); // // 3.2
-// // Dica: Utilize uma constante pra function
-// const usuario = { nome: 'Diego', idade: 23 };
-// function mostraIdade(usuario) {
-//  return usuario.idade;
+// 4º exercício
+// 4.1 Desestruturação simples
+// A partir do seguinte objeto:
+var empresa = {
+  nome: "Rocketseat",
+  endereco: {
+    cidade: "Rio do Sul",
+    estado: "SC"
+  }
+}; // Utilize a desestruturação para transformar as propriedades nome, cidade e estado em variáveis, no
+// fim deve ser possível fazer o seguinte:
+// console.log(nome); // Rocketseat
+// console.log(cidade); // Rio do Sul
+// console.log(estado); // SC
+
+var nome = empresa.nome,
+    _empresa$endereco = empresa.endereco,
+    cidade = _empresa$endereco.cidade,
+    estado = _empresa$endereco.estado;
+console.log(nome);
+console.log(cidade);
+console.log(estado); // 4.2 Desestruturação em parâmetros
+// Na seguinte função:
+// function mostraInfo(usuario) {
+//  return `${usuario.nome} tem ${usuario.idade} anos.`;
 // }
-// mostraIdade(usuario);
+// mostraInfo({ nome: 'Diego', idade: 23 })
+// Utilize a desestruturação nos parâmetros da função para buscar o nome e idade do usuário
+// separadamente e a função poder retornar apenas:
+// return `${nome} tem ${idade} anos.`;
 
-var usuario = {
-  nome: "Diego",
-  idade: 23
-};
+function mostraInfo(_ref) {
+  var nome = _ref.nome,
+      idade = _ref.idade;
+  return "".concat(nome, " tem ").concat(idade, " anos");
+}
 
-var mostraIdade = function mostraIdade(usuario) {
-  return usuario.idade;
-};
-
-mostraIdade(usuario); // // 3.3
-// // Dica: Utilize uma constante pra function
-// const nome = "Diego";
-// const idade = 23;
-// function mostraUsuario(nome = 'Diego', idade = 18) {
-//  return { nome, idade };
-// }
-// mostraUsuario(nome, idade);
-// mostraUsuario(nome);
-
-var nome = "Diego";
-var idade = 23;
-
-var mostraUsuario = function mostraUsuario() {
-  var nome = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Rafael";
-  var idade = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 18;
-  return {
-    nome: "Rafael",
-    idade: idade
-  };
-};
-
-console.log(mostraUsuario(nome, idade)); // Retorna { nome: "Diego", idade: 23 }
-
-console.log(mostraUsuario(nome)); // Retorna { nome: "Diego", idade: 18 }
-
-console.log(mostraUsuario(idade)); // Retorna { nome: 23, idade: 18 }
-
-console.log(mostraUsuario()); // Retorna { nome: "Rafael", idade: 18 }
-
-console.log(mostraUsuario(_)); // // 3.4
-// const promise = function() {
-//  return new Promise(function(resolve, reject) {
-//  return resolve();
-//  })
-// }
-
-var promise = function promise() {
-  return new Promise(function (resolve, reject) {
-    return resolve();
-  });
-};
+console.log(mostraInfo({
+  nome: "Rafael",
+  idade: 30
+}));

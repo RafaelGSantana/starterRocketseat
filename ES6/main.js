@@ -1,64 +1,43 @@
-// Converta as funções nos seguintes trechos de código em Arrow Functions:
+// 4º exercício
 
-// // 3.1
-// const arr = [1, 2, 3, 4, 5];
-// arr.map(function(item) {
-//  return item + 10;
-// });
-const arr = [1, 2, 3, 4, 5];
+// 4.1 Desestruturação simples
 
-arr.map((item) => item + 10);
+// A partir do seguinte objeto:
+const empresa = {
+  nome: "Rocketseat",
+  endereco: {
+    cidade: "Rio do Sul",
+    estado: "SC",
+  },
+};
+// Utilize a desestruturação para transformar as propriedades nome, cidade e estado em variáveis, no
+// fim deve ser possível fazer o seguinte:
+// console.log(nome); // Rocketseat
+// console.log(cidade); // Rio do Sul
+// console.log(estado); // SC
 
-// // 3.2
-// // Dica: Utilize uma constante pra function
-// const usuario = { nome: 'Diego', idade: 23 };
-// function mostraIdade(usuario) {
-//  return usuario.idade;
+const {
+  nome,
+  endereco: { cidade, estado },
+} = empresa;
+
+console.log(nome);
+console.log(cidade);
+console.log(estado);
+
+// 4.2 Desestruturação em parâmetros
+
+// Na seguinte função:
+// function mostraInfo(usuario) {
+//  return `${usuario.nome} tem ${usuario.idade} anos.`;
 // }
-// mostraIdade(usuario);
-const usuario = { nome: "Diego", idade: 23 };
+// mostraInfo({ nome: 'Diego', idade: 23 })
+// Utilize a desestruturação nos parâmetros da função para buscar o nome e idade do usuário
+// separadamente e a função poder retornar apenas:
+// return `${nome} tem ${idade} anos.`;
 
-const mostraIdade = (usuario) => usuario.idade;
+function mostraInfo({ nome, idade }) {
+  return `${nome} tem ${idade} anos`;
+}
 
-mostraIdade(usuario);
-
-// // 3.3
-// // Dica: Utilize uma constante pra function
-// const nome = "Diego";
-// const idade = 23;
-// function mostraUsuario(nome = 'Diego', idade = 18) {
-//  return { nome, idade };
-// }
-// mostraUsuario(nome, idade);
-// mostraUsuario(nome);
-
-const nome = "Diego";
-const idade = 23;
-
-const mostraUsuario = (nome = "Rafael", idade = 18) => ({
-  nome: "Rafael",
-  idade,
-});
-
-console.log(mostraUsuario(nome, idade));
-// Retorna { nome: "Diego", idade: 23 }
-
-console.log(mostraUsuario(nome));
-// Retorna { nome: "Diego", idade: 18 }
-
-console.log(mostraUsuario(idade));
-// Retorna { nome: 23, idade: 18 }
-
-console.log(mostraUsuario());
-// Retorna { nome: "Rafael", idade: 18 }
-
-console.log(mostraUsuario(_));
-
-// // 3.4
-// const promise = function() {
-//  return new Promise(function(resolve, reject) {
-//  return resolve();
-//  })
-// }
-
-const promise = () => new Promise((resolve, reject) => resolve());
+console.log(mostraInfo({ nome: "Rafael", idade: 30 }));
