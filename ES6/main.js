@@ -1,43 +1,57 @@
-// 4º exercício
+// 5º Exercício
+// Utilizando o operador de rest/spread (...) realize as seguintes operações:
 
-// 4.1 Desestruturação simples
+// 5.1 Rest
+// A partir do array: const arr = [1, 2, 3, 4, 5, 6], defina uma variável x que recebe a primeira
+// posição do vetor e outra variável y que recebe todo restante dos dados.
+// console.log(x); // 1
+// console.log(y); // [2, 3, 4, 5, 6]
 
-// A partir do seguinte objeto:
-const empresa = {
-  nome: "Rocketseat",
-  endereco: {
-    cidade: "Rio do Sul",
-    estado: "SC",
-  },
-};
-// Utilize a desestruturação para transformar as propriedades nome, cidade e estado em variáveis, no
-// fim deve ser possível fazer o seguinte:
-// console.log(nome); // Rocketseat
-// console.log(cidade); // Rio do Sul
-// console.log(estado); // SC
+const arr = [1, 2, 3, 4, 5, 6];
 
-const {
-  nome,
-  endereco: { cidade, estado },
-} = empresa;
+const [x, ...y] = arr;
 
-console.log(nome);
-console.log(cidade);
-console.log(estado);
+console.log(x);
+console.log(y);
 
-// 4.2 Desestruturação em parâmetros
+// Crie uma função que recebe inúmeros parâmetros e retorna a soma de todos eles:
+// // function soma...
+// console.log(soma(1, 2, 3, 4, 5, 6)); // 21
+// console.log(soma(1, 2)); // 3
 
-// Na seguinte função:
-// function mostraInfo(usuario) {
-//  return `${usuario.nome} tem ${usuario.idade} anos.`;
-// }
-// mostraInfo({ nome: 'Diego', idade: 23 })
-// Utilize a desestruturação nos parâmetros da função para buscar o nome e idade do usuário
-// separadamente e a função poder retornar apenas:
-// return `${nome} tem ${idade} anos.`;
-
-function mostraInfo({ nome, idade }) {
-  return `${nome} tem ${idade} anos`;
+function soma(...params) {
+  return params.reduce((total, next) => total + next);
 }
 
-console.log(mostraInfo({ nome: "Rafael", idade: 30 }));
+console.log(soma(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+// 5.2 Spread
+// A partir do objeto e utilizando o operador spread:
+const usuario = {
+  nome: "Diego",
+  idade: 23,
+  endereco: {
+    cidade: "Rio do Sul",
+    uf: "SC",
+    pais: "Brasil",
+  },
+};
+// Crie uma variável usuario2 que contenha todos os dados do usuário porém com nome Gabriel.
+const usuario2 = {
+  ...usuario,
+  nome: "Gabriel",
+};
+
+console.log(usuario2);
+
+// Crie uma variável usuario3 que contenha todos os dados do usuário porém com cidade Lontras.
+
+const usuario3 = {
+  ...usuario,
+  endereco: {
+    ...usuario.endereco,
+    cidade: "Lontras",
+  },
+};
+
+console.log(usuario3);
