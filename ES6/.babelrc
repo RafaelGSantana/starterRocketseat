@@ -1,5 +1,8 @@
 // O babel vai transformar as features feitas com ES6+ numa forma que todos os navegadores entendam.
 {
   "presets": ["@babel/preset-env"],
-  "plugins": ["@babel/plugin-proposal-object-rest-spread"]
+  "plugins": [
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-transform-async-to-generator"
+  ]
 }
