@@ -1,3 +1,5 @@
+import api from "./api";
+
 class App {
   constructor() {
     // Inicializa a variável onde ficarão armazenados os repositórios adicionados
@@ -5,6 +7,9 @@ class App {
 
     // Adiciona a referência para o elemento <form />
     this.formEl = document.getElementById("repo-form");
+
+    // Adiciona a referência para o elemento <input /> para pegarmos o valor dele
+    this.inputEl = document.querySelector("input[name=repository]");
 
     // Adiciona a referência para o elemento <ul />
     this.listEl = document.getElementById("repo-list");
@@ -19,16 +24,37 @@ class App {
   }
 
   // Função para adicionar repositórios na variável repositories
-  addRepository(event) {
+  async addRepository(event) {
     event.preventDefault();
 
+    // Pega o valor do input
+    const repoInput = this.inputEl.value;
+
+    // Verifica se há valor pra pegar, se não houver, para de executar a função
+    if (repoInput.length === 0) return;
+
+    // Se houver faz a busca na api do github
+    const response = await api.get(`/repos/${repoInput}`);
+
+    // Retorna os valores indicados dna desestruturação de response.data, do repositório buscado
+    const {
+      name,
+      description,
+      html_url,
+      owner: { avatar_url },
+    } = response.data;
+
     this.repositories.push({
-      name: "rocketseat.com.br",
-      description: "Tire sua ideia do papel e dê vida à sua startup",
-      avatar_url: "https://avatars0.githubusercontent.com/u/28929274?v=4",
-      html_url: "http://github.com/rocketseat/rocketseat.com.br",
+      name,
+      description,
+      avatar_url,
+      html_url,
     });
 
+    // Apaga o conteúdo do input após renderizar o repositório em tela
+    this.inputEl.value = "";
+
+    // Chama a função render
     this.render();
   }
 
@@ -50,9 +76,10 @@ class App {
       let descriptionEl = document.createElement("p");
       descriptionEl.appendChild(document.createTextNode(repo.description));
 
-      // Cria elemento <a target="_blank">Acessar</a>
+      // Cria elemento <a target="_blank" href={repo.html_url}>Acessar</a>
       let linkEl = document.createElement("a");
       linkEl.setAttribute("target", "_blank");
+      linkEl.setAttribute("href", repo.html_url);
       linkEl.appendChild(document.createTextNode("Acessar"));
 
       /** Cria elemento
