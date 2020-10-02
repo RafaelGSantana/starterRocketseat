@@ -23,6 +23,23 @@ class App {
     this.formEl.onsubmit = (event) => this.addRepository(event);
   }
 
+  // Função para exibir a mensagem de loading
+  setLoading(loading = true) {
+    // Se loading for true, cria um novo elemento em tela.
+    if (loading === true) {
+      // Cria o elemento <span id="loading">Carregando..</span>
+      let loadingEl = document.createElement("span");
+      loadingEl.appendChild(document.createTextNode("Carregando.."));
+      loadingEl.setAttribute("id", "loading");
+
+      // adiciona o elemento dentro do <form />
+      this.formEl.appendChild(loadingEl);
+    } else {
+      // Se loading for false, apaga o elemento criado acima, da tela
+      document.getElementById("loading").remove();
+    }
+  }
+
   // Função para adicionar repositórios na variável repositories
   async addRepository(event) {
     event.preventDefault();
@@ -33,29 +50,40 @@ class App {
     // Verifica se há valor pra pegar, se não houver, para de executar a função
     if (repoInput.length === 0) return;
 
-    // Se houver faz a busca na api do github
-    const response = await api.get(`/repos/${repoInput}`);
+    // Aciona a função de loading antes da busca, à api, ser realizada, com o valor padrão.
+    this.setLoading();
 
-    // Retorna os valores indicados dna desestruturação de response.data, do repositório buscado
-    const {
-      name,
-      description,
-      html_url,
-      owner: { avatar_url },
-    } = response.data;
+    // Se houver tenta a busca na api do github
+    try {
+      const response = await api.get(`/repos/${repoInput}`);
 
-    this.repositories.push({
-      name,
-      description,
-      avatar_url,
-      html_url,
-    });
+      // Retorna os valores indicados dna desestruturação de response.data, do repositório buscado
+      const {
+        name,
+        description,
+        html_url,
+        owner: { avatar_url },
+      } = response.data;
 
-    // Apaga o conteúdo do input após renderizar o repositório em tela
-    this.inputEl.value = "";
+      this.repositories.push({
+        name,
+        description,
+        avatar_url,
+        html_url,
+      });
 
-    // Chama a função render
-    this.render();
+      // Apaga o conteúdo do input após renderizar o repositório em tela
+      this.inputEl.value = "";
+
+      // Chama a função render
+      this.render();
+    } catch (err) {
+      // Se não conseguir fazer a buscar exibe mensagem de erro
+      alert("O repositório não existe! Verifique o nome digitado no campo.");
+    }
+
+    // Se deu certo ou se deu errado, no final da busca define loading como false para remover o loadingEl da tela
+    this.setLoading(false);
   }
 
   // Vai apagar o conteúdo da lista e vai renderizar os itens do zero, percorrendo todo o array
